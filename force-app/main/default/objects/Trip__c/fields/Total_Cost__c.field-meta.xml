@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Cost__c</fullName>
+    <label>Total Cost</label>
+    <description>Coût total du voyage (repris du montant de l'opportunité).</description>
+    <type>Currency</type>
+    <precision>16</precision>
+    <scale>2</scale>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+</CustomField>
