@@ -1,14 +1,3 @@
-/**
- * Tests unitaires de OpportunityTriggerHandler (règle GGT-02).
- *
- * Scénarios couverts :
- *  - Transition Prospecting -> Closed Won : crée 1 Trip__c avec le bon mapping.
- *  - Update sans changement de stage : aucun Trip__c créé.
- *  - Opportunity déjà Closed Won, simple update d'un autre champ : pas de doublon.
- *  - Bulk : 200 opportunities passées en Closed Won en une seule DML.
- *  - Closed Lost : aucun Trip__c créé.
- *  - Opportunity sans AccountId : skip silencieux, aucun Trip__c créé.
- */
 @isTest
 private class OpportunityTriggerHandlerTest {
 
@@ -16,10 +5,6 @@ private class OpportunityTriggerHandlerTest {
     private static final String STAGE_CLOSED_WON  = 'Closed Won';
     private static final String STAGE_CLOSED_LOST = 'Closed Lost';
 
-    /**
-     * Jeu de données partagé : un Account + une Opportunity en Prospecting
-     * (volontairement pas en Closed Won pour pouvoir tester la transition).
-     */
     @testSetup
     static void setupData() {
         Account acc = new Account(Name = 'GGT Test Account');
@@ -89,12 +74,10 @@ private class OpportunityTriggerHandlerTest {
     static void alreadyClosedWonDoesNotCreateDuplicate() {
         Opportunity opp = [SELECT Id FROM Opportunity LIMIT 1];
 
-        // Première transition -> 1 Trip__c créé
         opp.StageName = STAGE_CLOSED_WON;
         update opp;
 
         Test.startTest();
-        // Second update sur une opportunité déjà Closed Won : aucun nouveau Trip__c
         opp.Destination__c = 'Maldives';
         update opp;
         Test.stopTest();
