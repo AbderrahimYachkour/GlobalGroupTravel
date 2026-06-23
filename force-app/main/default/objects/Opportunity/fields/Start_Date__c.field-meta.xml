@@ -4,6 +4,6 @@
     <label>Start Date</label>
     <description>Date de début prévue du voyage.</description>
     <type>Date</type>
-    <required>false</required>
+    <required>True</required>
     <trackTrending>false</trackTrending>
 </CustomField>

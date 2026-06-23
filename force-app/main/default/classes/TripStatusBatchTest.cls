@@ -106,20 +106,6 @@ private class TripStatusBatchTest {
     }
 
     @isTest
-    static void tripWithNullStartDateIsNotProcessed() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-        Trip__c trip = buildTrip(acc.Id, null, TODAY.addDays(10), STATUS_UPCOMING);
-        insert trip;
-
-        Test.startTest();
-        Database.executeBatch(new TripStatusBatch(), 200);
-        Test.stopTest();
-
-        Trip__c reloaded = [SELECT Status__c FROM Trip__c WHERE Id = :trip.Id];
-        System.assertEquals(STATUS_UPCOMING, reloaded.Status__c, 'Date null exclue du SOQL');
-    }
-
-    @isTest
     static void tripAlreadyAtCorrectStatusIsNotUpdated() {
         Account acc = [SELECT Id FROM Account LIMIT 1];
         Trip__c trip = buildTrip(acc.Id, TODAY.addDays(10), TODAY.addDays(20), STATUS_UPCOMING);

@@ -4,6 +4,6 @@
     <label>End Date</label>
     <description>Date de fin prévue du voyage.</description>
     <type>Date</type>
-    <required>false</required>
+    <required>True</required>
     <trackTrending>false</trackTrending>
 </CustomField>
