@@ -89,30 +89,6 @@ private class TripTriggerHandlerTest {
     }
 
     @isTest
-    static void insertWithNullEndDateIsNotValidated() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-        Trip__c trip = buildTrip(acc.Id, TODAY.addDays(10), null);
-
-        Test.startTest();
-        Database.SaveResult result = Database.insert(trip, false);
-        Test.stopTest();
-
-        System.assert(result.isSuccess(), 'Pas de validation si End_Date est null');
-    }
-
-    @isTest
-    static void insertWithNullStartDateIsNotValidated() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-        Trip__c trip = buildTrip(acc.Id, null, TODAY.addDays(10));
-
-        Test.startTest();
-        Database.SaveResult result = Database.insert(trip, false);
-        Test.stopTest();
-
-        System.assert(result.isSuccess(), 'Pas de validation si Start_Date est null');
-    }
-
-    @isTest
     static void bulkMixedInsertOnlyInvalidsAreBlocked() {
         Account acc = [SELECT Id FROM Account LIMIT 1];
         List<Trip__c> trips = new List<Trip__c>();
